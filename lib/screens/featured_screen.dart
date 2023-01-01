@@ -1,8 +1,10 @@
 import 'package:edu_app/constants/color.dart';
+import 'package:edu_app/models/category.dart';
 import 'package:edu_app/widgets/circle_botton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../widgets/category_card.dart';
 import '../widgets/search_testfield.dart';
 
 class FeaturedScreen extends StatefulWidget {
@@ -18,11 +20,13 @@ class _FeaturedScreenState extends State<FeaturedScreen> {
     return AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: Scaffold(
-          body: Column(
-            children: const [
-              AppBar(),
-              Body(),
-            ],
+          body: SingleChildScrollView(
+            child: Column(
+              children: const [
+                AppBar(),
+                Body(),
+              ],
+            ),
           ),
         ));
   }
@@ -53,7 +57,22 @@ class Body extends StatelessWidget {
                       ?.copyWith(color: kPrimaryColor),
                 ))
           ]),
-        )
+        ),
+        GridView.builder(
+            shrinkWrap: true,
+            itemCount: categoryList.length,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 26,
+              vertical: 8,
+            ),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.8,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 24),
+            itemBuilder: (context, index) {
+              return CategoryCard(category: categoryList[index]);
+            })
       ],
     );
   }
