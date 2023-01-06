@@ -1,5 +1,6 @@
 import 'package:edu_app/constants/color.dart';
 import 'package:edu_app/models/course.dart';
+import 'package:edu_app/screens/details_screen.dart';
 import 'package:flutter/material.dart';
 
 class CourceContainer extends StatelessWidget {
@@ -9,7 +10,12 @@ class CourceContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DetailsScreen(title: course.name),
+        ),
+      ),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
